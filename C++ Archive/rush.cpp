@@ -67,7 +67,7 @@ int main() {
                 cin>>sAction;
                 if (sAction == "crisps" && hero.gold >= 20 ) {
                     hero.crisps = hero.crisps + 1;
-                    hero.gold -= 15;
+                    hero.gold -= 20;
                     cout<<"+1 crisps added."<<endl;
                 }
                 else if (sAction == "potion" && hero.gold >= 35) {
@@ -75,7 +75,7 @@ int main() {
                     hero.gold -= 35;
                     cout<<"+1 potion added."<<endl;
                 }
-                else if (sAction == "vaporizor" && currentBoss >= 2 && hero.gold >= 40) {
+                else if (sAction == "vaporizor" && hero.vaporizor == 0 &&currentBoss >= 2 && hero.gold >= 40) {
                     hero.vaporizor += 1;
                     hero.minDamage += 11;
                     hero.maxDamage += 11;
@@ -85,7 +85,7 @@ int main() {
                 else if (sAction == "vaporizor" && hero.vaporizor == 1) {
                     cout<<"I don't have this anymore..."<<endl;
                 }
-                else if (sAction == "scarf" && currentBoss >= 1 && hero.gold >= 20) {
+                else if (sAction == "scarf" && hero.scarf == 0 && currentBoss >= 1 && hero.gold >= 20) {
                     hero.scarf += 1;
                     hero.dodgeChance += 27;
                     hero.gold -= 20;
@@ -211,8 +211,8 @@ int main() {
                                 cout<<"As you deal what appears to be the finishing blow, the fallen guard falls to his knees,"<<endl;
                                 cout<<"He mutters something you cannot make out, and collapses completely."<<endl;
                                 cout<<"Rumor spreads the smuggler is selling a new item..."<<endl;
-                                cout<<"+93 gold."<<endl;
-                                hero.gold += 93;    
+                                cout<<"+"<<brutes[currentBoss].goldReward<<" gold."<<endl;
+                                hero.gold += brutes[currentBoss].goldReward;    
                                 currentBoss += 1;
                                 saMenu = false;
                             }
@@ -252,8 +252,11 @@ int main() {
                     }
                 }
             }
-            else if (currentBoss = 1) {
+            else if (currentBoss == 1) {
                 hero.dodgeChance = 3;
+                if (hero.scarf == 1) {
+                    hero.dodgeChance += 27;
+                }
                 cout<<"The exit room, once guarded by Antoine, is now unoccupied, and maybe you can leave..."<<endl;
                 cout<<"You budge the door... And it opens? The door was never locked. Why didn't Antoine leave?"<<endl;
                 cout<<"You step out of the dungeon. Fresh air hits your nose like a sharp blade. ..."<<endl;
