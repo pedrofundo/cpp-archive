@@ -26,11 +26,55 @@ struct {
     int vaporizor = 0; // determines if hero has a vaporizor
     int scarf = 0; // determines if hero has a scarf
 } hero;
+string sAction, saAct, conAction, nkAct, nkAttack, dgAct, dgMenu;
+int playerAttackValue, bossAttackValue, bossDamage, bossCritValue, playerCritValue, heroDamage, multiplier, nuclearCounter;
+void consume() {
+    bool conMenu = true;
+    while(conMenu) {
+        cout<<"What will you use? (crisps, potion, cancel)"<<endl;
+        cin>>conAction;
+        if (conAction == "cancel") {
+            conMenu = false;
+        }
+        else if (conAction == "crisps") {
+            if (hero.crisps == 0) {
+                cout<<"You have no crisps!"<<endl;
+            }
+            else if (hero.hp == hero.maxHp) {
+                cout<<"Your HP is already maxed out!"<<endl;
+            }
+            else {
+                hero.crisps -= 1;
+                hero.hp += 11;
+                if (hero.hp > hero.maxHp) {
+                    hero.hp = hero.maxHp;
+                }
+                cout<<"You eat the crisps."<<endl;
+                cout<<"Current HP: "<<hero.hp<<endl;
+            }
 
+        }
+        else if (conAction == "potion") {
+            if (hero.potion == 0) {
+                cout<<"You have no potions!"<<endl;
+            }
+            else if (hero.hp == hero.maxHp) {
+                cout<<"Your HP is already maxed out!"<<endl;
+            }
+            else {
+                hero.potion -= 1;
+                hero.hp += 22;
+                if (hero.hp > hero.maxHp) {
+                    hero.hp = hero.maxHp;
+                }
+                cout<<"You drink the potion."<<endl;
+                cout<<"Current HP: "<<hero.hp<<endl;
+            }
+        }
+    }
+}
 int main() {
     srand(time(0));
-    string sAction, saAct, conAction, nkAct, nkAttack, dgAct, dgMenu;
-    int playerAttackValue, bossAttackValue, bossDamage, bossCritValue, playerCritValue, heroDamage, multiplier, nuclearCounter;
     hero.hp = hero.maxHp;
     nuclearCounter = 14;
     Boss brutes[3] {
@@ -139,48 +183,7 @@ int main() {
                         cout<<brutes[currentBoss].hp<<" HP, "<<brutes[currentBoss].dodgeChance<<" DC"<<endl;
                     }
                     else if (saAct == "consume") {
-                        bool conMenu = true;
-                        while(conMenu) {
-                            cout<<"What will you use? (crisps, potion, cancel)"<<endl;
-                            cin>>conAction;
-                            if (conAction == "cancel") {
-                                conMenu = false;
-                            }
-                            else if (conAction == "crisps") {
-                                if (hero.crisps == 0) {
-                                    cout<<"You have no crisps!"<<endl;
-                                }
-                                else if (hero.hp == hero.maxHp) {
-                                    cout<<"Your HP is already maxed out!"<<endl;
-                                }
-                                else {
-                                    hero.crisps -= 1;
-                                    hero.hp += 11;
-                                    if (hero.hp > hero.maxHp) {
-                                        hero.hp = hero.maxHp;
-                                    }
-                                    cout<<"You eat the crisps."<<endl;
-                                    cout<<"Current HP: "<<hero.hp<<endl;
-                                }
-                            }
-                            else if (conAction == "potion") {
-                                if (hero.potion == 0) {
-                                    cout<<"You have no potions!"<<endl;
-                                }
-                                else if (hero.hp == hero.maxHp) {
-                                    cout<<"Your HP is already maxed out!"<<endl;
-                                }
-                                else {
-                                    hero.potion -= 1;
-                                    hero.hp += 22;
-                                    if (hero.hp > hero.maxHp) {
-                                        hero.hp = hero.maxHp;
-                                    }
-                                    cout<<"You drink the potion"<<endl;
-                                    cout<<"Current HP: "<<hero.hp<<endl;
-                                }
-                            }
-                        }
+                        consume();
                     }    
                     else if (saAct == "fight") {
                         playerAttackValue = (rand() % 100) + 1;
@@ -296,50 +299,7 @@ int main() {
                         cout<<brutes[currentBoss].hp<<" HP, "<<brutes[currentBoss].dodgeChance<<" DC"<<endl;
                     }
                     else if(nkAct == "consume") {
-                        bool conMenu = true;
-                        while(conMenu) {
-                            cout<<"What will you use? (crisps, potion, cancel)"<<endl;
-                            cin>>conAction;
-                            if (conAction == "cancel") {
-                                conMenu = false;
-                            }
-                            else if (conAction == "crisps") {
-                                if (hero.crisps == 0) {
-                                    cout<<"You have no crisps!"<<endl;
-                                }
-                                else if (hero.hp == hero.maxHp) {
-                                    cout<<"Your HP is already maxed out!"<<endl;
-                                }
-                                else {
-                                    hero.crisps -= 1;
-                                    hero.hp += 11;
-                                    cout<<"You eat the crisps."<<endl;
-                                    cout<<"Current HP: "<<hero.hp<<endl;
-                                    if (hero.hp > hero.maxHp) {
-                                        hero.hp = hero.maxHp;
-                                    }
-                                }
-                                
-                            }
-                            else if (conAction == "potion") {
-                                if (hero.potion == 0) {
-                                    cout<<"You have no potions!"<<endl;
-                                }
-                                else if (hero.hp == hero.maxHp) {
-                                    cout<<"Your HP is already maxed out!"<<endl;
-                                }
-                                else {
-                                    hero.potion -= 1;
-                                    hero.hp += 22;
-                                    cout<<"You drink the potion."<<endl;
-                                    cout<<"Current HP: "<<hero.hp<<endl;
-                                    if (hero.hp > hero.maxHp) {
-                                        hero.hp = hero.maxHp;
-                                    }
-                                }
-                                
-                            }
-                        }
+                        consume();
                     }
                     else if (nkAct == "fight") {
                         brutes[currentBoss].dodgeChance = 25;
@@ -470,50 +430,7 @@ int main() {
                         cout<<" HP, "<<brutes[currentBoss].dodgeChance<<" DC"<<endl;
                     }
                     else if(dgAct == "consume") {
-                        bool conMenu = true;
-                        while(conMenu) {
-                            cout<<"What will you use? (crisps, potion, cancel)"<<endl;
-                            cin>>conAction;
-                            if (conAction == "cancel") {
-                                conMenu = false;
-                            }
-                            else if (conAction == "crisps") {
-                                if (hero.crisps == 0) {
-                                    cout<<"You have no crisps!"<<endl;
-                                }
-                                else if (hero.hp == hero.maxHp) {
-                                    cout<<"Your HP is already maxed out!"<<endl;
-                                }
-                                else {
-                                    hero.crisps -= 1;
-                                    hero.hp += 11;
-                                    cout<<"You eat the crisps."<<endl;
-                                    cout<<"Current HP: "<<hero.hp<<endl;
-                                    if (hero.hp > hero.maxHp) {
-                                        hero.hp = hero.maxHp;
-                                    }
-                                }
-                                
-                            }
-                            else if (conAction == "potion") {
-                                if (hero.potion == 0) {
-                                    cout<<"You have no potions!"<<endl;
-                                }
-                                else if (hero.hp == hero.maxHp) {
-                                    cout<<"Your HP is already maxed out!"<<endl;
-                                }
-                                else {
-                                    hero.potion -= 1;
-                                    hero.hp += 22;
-                                    cout<<"You drink the potion."<<endl;
-                                    cout<<"Current HP: "<<hero.hp<<endl;
-                                    if (hero.hp > hero.maxHp) {
-                                        hero.hp = hero.maxHp;
-                                    }
-                                }
-                                
-                            }
-                        }
+                        consume();
                     }
                     else if (dgAct == "fight") {
                         nuclearCounter -= 1;
