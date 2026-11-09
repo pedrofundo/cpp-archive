@@ -51,8 +51,8 @@ int main(){
             std::cout<<"Product added successfully!";
 		}
 		else if (action == "help") {
-			std::cout<<"add   - adds a new product to the list"<<std::endl;
-			std::cout<<"list  - displays the product list "<<std::endl;
+			std::cout<<"add    - adds a new product to the list"<<std::endl;
+			std::cout<<"list   - displays the product list "<<std::endl;
 			std::cout<<"search - by inputting a product ID, search fetches and prints out its info"<<std::endl;
 			std::cout<<"remove - by inputting a product ID, remove fetches and removes ALL info"<<std::endl;
 		}
