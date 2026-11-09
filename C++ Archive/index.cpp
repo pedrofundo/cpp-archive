@@ -2,6 +2,14 @@
 #include <vector>
 #include <string>
 
+void inputHandling(int &position) {
+    if (!std::cin) {
+        std::cin.clear();
+        std::cin.ignore(9999, '\n');
+        std::cout<<"Invalid position!";
+        position = -1;
+    }
+}
 int main() {
     std::vector<std::string> index;
     std::string action;
@@ -31,24 +39,19 @@ int main() {
             std::cout<<"Insert position (1 to "<< index.size() + 1 <<"): ";
             int position;
             std::cin>>position;
-            if (!std::cin) {
-                std::cin.clear();
-                std::cin.ignore(9999, '\n');
-                std::cout<<"Invalid input!";
-                continue;
-            }
-            // Clear the newline character so getline doesn't skip
-            std::cin.ignore(); // Empty argument consumes 1 char (newline in this case)
-            
-            std::cout<<"Input full name: ";
-            std::string name;
-            std::getline(std::cin, name);
+            inputHandling(position);
             
             if (position >= 1 && position <= index.size() + 1) {
+                std::cin.ignore(); // Empty argument consumes 1 char (newline in this case)
+                std::cout<<"Input full name: ";
+                std::string name;
+                std::getline(std::cin, name);
                 index.insert(index.begin() + (position - 1), name);
                 std::cout<<name<<" added successfully!"<< std::endl;
             } else {
-                std::cout<<"Invalid position!"<<std::endl;
+                if (position != -1) {
+                    std::cout<<"Invalid position!"<<std::endl;
+                }                
             }
         }
         else if (action == "removefromindex") {
@@ -59,12 +62,7 @@ int main() {
               std::cout<<"Insert position (1 to "<< index.size()<<"): ";
               int position;
               std::cin>>position;
-              if (!std::cin) {
-                std::cin.clear();
-                std::cin.ignore(9999, '\n');
-                std::cout<<"Invalid position!";
-                continue;
-              }
+              inputHandling(position);
               if (position >= 1 && position <= index.size()) {
                 index.erase(index.begin() + position - 1);
                 std::cout<<"Entry deleted successfully!";
