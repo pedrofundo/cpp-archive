@@ -21,7 +21,6 @@ int main() {
 			int ninput;
 			std::cin>>ninput;
 			index.push_back(ninput);
-		}
+		}		
 	}
-	
 }
